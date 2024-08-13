@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     implementation("org.bstats:bstats-bukkit:3.0.2")
-    implementation("org.xerial:sqlite-jdbc:3.46.0.1") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation("com.github.andrew121410:CCUtilsJava:b3c9a23201")
     implementation("net.kyori:adventure-text-minimessage:4.17.0")
     implementation("net.kyori:adventure-text-serializer-legacy:4.17.0")
 

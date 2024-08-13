@@ -1,5 +1,6 @@
 package com.andrew121410.mc.world16essentials.managers;
 
+import com.andrew121410.ccutils.dependencies.google.common.collect.Multimap;
 import com.andrew121410.ccutils.storage.ISQL;
 import com.andrew121410.ccutils.storage.SQLite;
 import com.andrew121410.ccutils.storage.easy.EasySQL;
@@ -8,7 +9,6 @@ import com.andrew121410.ccutils.storage.easy.SQLDataStore;
 import com.andrew121410.mc.world16essentials.World16Essentials;
 import com.andrew121410.mc.world16essentials.objects.KitObject;
 import com.andrew121410.mc.world16utils.utils.BukkitSerialization;
-import com.google.common.collect.Multimap;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;

@@ -1,11 +1,11 @@
 package com.andrew121410.mc.world16essentials.managers;
 
+import com.andrew121410.ccutils.dependencies.google.common.collect.Multimap;
 import com.andrew121410.ccutils.storage.easy.EasySQL;
 import com.andrew121410.ccutils.storage.easy.MultiTableEasySQL;
 import com.andrew121410.ccutils.storage.easy.SQLDataStore;
 import com.andrew121410.mc.world16essentials.World16Essentials;
 import com.andrew121410.mc.world16utils.config.UnlinkedWorldLocation;
-import com.google.common.collect.Multimap;
 import org.bukkit.Location;
 
 import java.sql.SQLException;
