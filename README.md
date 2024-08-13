@@ -16,7 +16,7 @@ Even though I could've easily forked EssentialsX and fixed that. I didn't though
 [Latest Build of Legacy-World1-6Essentials](https://github.com/World1-6/Legacy-World1-6Essentials/releases)
 
 ## Commands & Permissions:
-https://github.com/World1-6/World1-6Essentials/blob/master/src/main/resources/plugin.yml
+https://github.com/World1-6/Legacy-World1-6Essentials/blob/master/src/main/resources/plugin.yml
 
 ## Building:
 `./gradlew build`
