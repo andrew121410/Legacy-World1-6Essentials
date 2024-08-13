@@ -1,5 +1,5 @@
-# World1-6Essentials
-⚠️ `This is the 1.12.2 version of World1-6Essentials.` ⚠️
+# Legacy-World1-6Essentials
+⚠️ `This is the legacy 1.12.2 version of World1-6Essentials.` ⚠️
 
 `May not get updated as much as the latest version of World1-6Essentials. Nor will it get new features as the latest version. Or get any updates at all`
 
