@@ -27,53 +27,39 @@ public class WarpManager {
         for (String key : cs.getKeys(false)) {
             ConfigurationSection warpCs = cs.getConfigurationSection(key);
 
-            // If the warpCs is null, continue.
-            if (warpCs == null) continue;
+            Object object = warpCs.get("Location");
 
-            // Convert old data if needed.
-            convertOldDataIfNeeded(key, warpCs);
+//            // Convert old location to UnlinkedWorldLocation
+//            if (!(object instanceof UnlinkedWorldLocation)) {
+//                ConfigurationSection locationCs = warpCs.getConfigurationSection("Location");
+//                if (locationCs != null) {
+//                    String world = locationCs.getString("world", null);
+//                    String x = locationCs.getString("x", null);
+//                    String y = locationCs.getString("y", null);
+//                    String z = locationCs.getString("z", null);
+//                    String yaw = locationCs.getString("yaw", null);
+//                    String pitch = locationCs.getString("pitch", null);
+//
+//                    if (world != null && x != null && y != null && z != null && yaw != null && pitch != null) {
+//                        UnlinkedWorldLocation unlinkedWorldLocation = new UnlinkedWorldLocation(
+//                                world,
+//                                Double.parseDouble(x),
+//                                Double.parseDouble(y),
+//                                Double.parseDouble(z),
+//                                Float.parseFloat(yaw),
+//                                Float.parseFloat(pitch));
+//
+//                        warpCs.set("Location", unlinkedWorldLocation);
+//                        this.warpsYml.saveConfig();
+//                    }
+//                }
+//            }
 
-            UnlinkedWorldLocation location = (UnlinkedWorldLocation) warpCs.get("Location");
-            this.warpsMap.putIfAbsent(key, location);
+            Location location = (Location) warpCs.get("Location");
+            UnlinkedWorldLocation unlinkedWorldLocation = new UnlinkedWorldLocation(location);
+
+            this.warpsMap.putIfAbsent(key, unlinkedWorldLocation);
         }
-    }
-
-    private void convertOldDataIfNeeded(String key, ConfigurationSection warpCs) {
-        Object object = warpCs.get("Location");
-
-        // Convert old data (Location to UnlinkedWorldLocation)
-        if (!(object instanceof UnlinkedWorldLocation)) {
-            ConfigurationSection locationCs = warpCs.getConfigurationSection("Location");
-            if (locationCs != null) {
-                String world = locationCs.getString("world", null);
-                String x = locationCs.getString("x", null);
-                String y = locationCs.getString("y", null);
-                String z = locationCs.getString("z", null);
-                String yaw = locationCs.getString("yaw", null);
-                String pitch = locationCs.getString("pitch", null);
-
-                // If the values are null then return.
-                if (world == null || x == null || y == null || z == null || yaw == null || pitch == null) return;
-
-                Location location = new Location(
-                        this.plugin.getServer().getWorld(world), // Get the world by name
-                        Double.parseDouble(x),
-                        Double.parseDouble(y),
-                        Double.parseDouble(z),
-                        Float.parseFloat(yaw),
-                        Float.parseFloat(pitch));
-
-                UnlinkedWorldLocation unlinkedWorldLocation = new UnlinkedWorldLocation(location);
-
-                warpCs.set("Location", unlinkedWorldLocation);
-                this.warpsYml.saveConfig();
-
-                this.plugin.getServer().getLogger().info("Converted very old warp " + key + " to use UnlinkedWorldLocation instead of Location.");
-            }
-        }
-
-        // Convert old data (UnlinkedWorldLocation.world to UUID)
-        // This is done automatically by the UnlinkedWorldLocation class.
     }
 
     public void add(String name, Location location) {
