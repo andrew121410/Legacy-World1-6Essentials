@@ -12,6 +12,8 @@ public class AfkObject {
     private Location location;
     private boolean isAfk;
 
+    private boolean ignore;
+
     public AfkObject(Player player) {
         this.uuid = player.getUniqueId();
         this.location = player.getLocation();
@@ -50,5 +52,13 @@ public class AfkObject {
     public void restart(Player player) {
         this.location = player.getLocation();
         this.isAfk = false;
+    }
+
+    public boolean isIgnore() {
+        return ignore;
+    }
+
+    public void setIgnore(boolean ignore) {
+        this.ignore = ignore;
     }
 }

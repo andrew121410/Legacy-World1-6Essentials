@@ -1,8 +1,11 @@
 package com.andrew121410.ccutils.storage.easy;
 
 import com.andrew121410.ccutils.storage.ISQL;
+import com.andrew121410.ccutils.storage.MySQL;
+import com.andrew121410.ccutils.storage.SQLite;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import lombok.SneakyThrows;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -193,34 +196,109 @@ public class MultiTableEasySQL implements IMultiTableEasySQL {
         this.isql.disconnect();
     }
 
+    @SneakyThrows
     @Override
     public void addColumn(String tableName, String columnName, String after) {
-        String command = "ALTER TABLE " + tableName + " ADD COLUMN `" + columnName + "` TEXT";
-        if (after != null) command = command + " AFTER " + after;
-        command = command + ";";
+        if (!isValidIdentifier(tableName) || !isValidIdentifier(columnName) || (after != null && !isValidIdentifier(after))) {
+            throw new SQLException("Invalid table or column name.");
+        }
+
+        // Construct the SQL command
+        String command = "ALTER TABLE `" + tableName + "` ADD COLUMN `" + columnName + "` TEXT";
+        if (isql instanceof MySQL && after != null) {
+            command += " AFTER `" + after + "`";
+        }
+        command += ";";
+
         isql.connect();
-        isql.executeCommand(command);
-        isql.disconnect();
+        try {
+            isql.executeCommand(command);
+        } finally {
+            isql.disconnect();
+        }
     }
 
+    @SneakyThrows
     @Override
     public void deleteColumn(String tableName, String columnName) {
-        String command = "ALTER TABLE " + tableName + " DROP COLUMN `" + columnName + "`;";
-        isql.connect();
-        isql.executeCommand(command);
-        isql.disconnect();
+        if (isql instanceof SQLite) {
+            // SQLite does not support DROP COLUMN directly.
+            // You need to create a new table without the column, copy data, and rename it.
+            throw new UnsupportedOperationException("SQLite does not support dropping columns directly.");
+        } else {
+            if (!isValidIdentifier(tableName) || !isValidIdentifier(columnName)) {
+                throw new SQLException("Invalid table or column name.");
+            }
+
+            String command = "ALTER TABLE `" + tableName + "` DROP COLUMN `" + columnName + "`;";
+
+            isql.connect();
+            try {
+                isql.executeCommand(command);
+            } finally {
+                isql.disconnect();
+            }
+        }
     }
 
     @Override
     public List<String> getAllTables() throws SQLException {
         isql.connect();
-        ResultSet resultSet = isql.getResult("SHOW TABLES;");
+
         List<String> list = new ArrayList<>();
-        while (resultSet.next()) {
-            list.add(resultSet.getString(1));
+        ResultSet resultSet = null;
+        try {
+            if (isql instanceof MySQL) {
+                resultSet = isql.getResult("SHOW TABLES;");
+            } else if (isql instanceof SQLite) {
+                resultSet = isql.getResult("SELECT name FROM sqlite_master WHERE type='table';");
+            }
+
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    list.add(resultSet.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            isql.disconnect();
         }
-        isql.disconnect();
+
         return list;
+    }
+
+    @Override
+    public void deleteTable(String tableName) throws SQLException {
+        if (!isValidIdentifier(tableName)) {
+            throw new SQLException("Invalid table name.");
+        }
+
+        String command = "DROP TABLE IF EXISTS `" + tableName + "`;";
+
+        isql.connect();
+        try {
+            isql.executeCommand(command);
+        } finally {
+            isql.disconnect();
+        }
+    }
+
+    /**
+     * Validates if the given identifier (table or column name) is a valid SQL identifier.
+     *
+     * @param identifier The identifier to validate.
+     * @return true if valid, false otherwise.
+     */
+    private boolean isValidIdentifier(String identifier) {
+        return identifier != null && identifier.matches("[a-zA-Z_][a-zA-Z0-9_]*");
     }
 
     public ISQL getISQL() {

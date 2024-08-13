@@ -1,6 +1,5 @@
 package com.andrew121410.mc.world16utils.gui;
 
-import com.andrew121410.ccutils.utils.Utils;
 import com.andrew121410.mc.world16utils.gui.buttons.AbstractGUIButton;
 import com.andrew121410.mc.world16utils.gui.buttons.CloneableGUIButton;
 import com.andrew121410.mc.world16utils.gui.buttons.defaults.ChatResponseButton;
@@ -9,6 +8,7 @@ import com.andrew121410.mc.world16utils.gui.buttons.defaults.NoEventButton;
 import com.andrew121410.mc.world16utils.gui.buttons.events.pages.GUINextPageEvent;
 import com.andrew121410.mc.world16utils.gui.buttons.events.pages.PageEventType;
 import com.andrew121410.mc.world16utils.utils.InventoryUtils;
+import com.andrew121410.mc.world16utils.utils.Utils;
 import com.google.common.collect.Lists;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

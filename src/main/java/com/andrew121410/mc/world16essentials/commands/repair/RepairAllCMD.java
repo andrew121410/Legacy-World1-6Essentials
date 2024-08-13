@@ -64,9 +64,9 @@ public class RepairAllCMD implements CommandExecutor {
             InventoryUtils.repairItem(itemStack);
         }
 
-        target.sendMessage(Translate.color("&6All of your items have been repaired."));
+        target.sendMessage(Translate.miniMessage("<gold>All of your items have been repaired."));
         if (commandSender != null) {
-            commandSender.sendMessage(Translate.color("&6You have repaired all of &a" + target.getName() + "&6's items."));
+            commandSender.sendMessage(Translate.miniMessage("<gold>You have repaired all of <reset><green>" + target.getName() + "<reset><gold>'s items."));
         }
     }
 }

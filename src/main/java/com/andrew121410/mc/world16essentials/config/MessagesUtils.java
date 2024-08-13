@@ -29,10 +29,10 @@ public class MessagesUtils {
     }
 
     private void addDefaults() {
-        this.messagesYml.getConfig().addDefault("prefix", "[&9World1-6&r]");
-        this.messagesYml.getConfig().addDefault("welcomeBackMessage", "%prefix% &6Welcome back, %player%!");
-        this.messagesYml.getConfig().addDefault("firstJoinMessage", "%prefix% &6Welcome to the server, %player%!");
-        this.messagesYml.getConfig().addDefault("leaveMessage", "%prefix% &6%player% has left the server.");
+        this.messagesYml.getConfig().addDefault("prefix", "[<blue>World1-6<reset>]");
+        this.messagesYml.getConfig().addDefault("welcomeBackMessage", "%prefix% <gold>Welcome back, %player%!");
+        this.messagesYml.getConfig().addDefault("firstJoinMessage", "%prefix% <gold>Welcome to the server, %player%!");
+        this.messagesYml.getConfig().addDefault("leaveMessage", "%prefix% <gold>%player% has left the server.");
 
         this.messagesYml.getConfig().options().copyDefaults(true);
         this.messagesYml.saveConfig();
@@ -47,7 +47,7 @@ public class MessagesUtils {
 
     public String parseMessage(Player player, String message) {
         message = parseMessageString(player, message);
-        return Translate.color(message);
+        return Translate.miniMessage(message);
     }
 
     public String getPrefix() {

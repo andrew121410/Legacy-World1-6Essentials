@@ -62,11 +62,10 @@ public class BackCMD implements CommandExecutor {
                 player.sendMessage(Translate.color("&4No death back location was found..."));
                 return true;
             }
-//            if (!deathLocation.isWorldLoaded()) {
-//                player.sendMessage(Translate.miniMessage("<red>World is not loaded..."));
-//                return true;
-//            }
-
+            if (!deathLocation.isWorldLoaded()) {
+                player.sendMessage(Translate.miniMessage("<red>World is not loaded..."));
+                return true;
+            }
             player.teleport(deathLocation);
             player.sendMessage(Translate.color("&6Teleporting..."));
         } else if (args.length == 1 && args[0].equalsIgnoreCase("tp")) {
@@ -79,10 +78,10 @@ public class BackCMD implements CommandExecutor {
                 player.sendMessage(Translate.color("&4No tp back location was found..."));
                 return true;
             }
-//            if (!tpLocation.isWorldLoaded()) {
-//                player.sendMessage(Translate.miniMessage("<red>World is not loaded..."));
-//                return true;
-//            }
+            if (!tpLocation.isWorldLoaded()) {
+                player.sendMessage(Translate.miniMessage("<red>World is not loaded..."));
+                return true;
+            }
             player.teleport(tpLocation);
             player.sendMessage(Translate.color("&6Teleporting..."));
         } else {

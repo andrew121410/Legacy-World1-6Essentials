@@ -67,7 +67,7 @@ public class SpawnMobCMD implements CommandExecutor {
             }
 
             if (amount > api.getConfigUtils().getSpawnMobCap()) {
-                player.sendMessage(Translate.color("&cYou can only spawn &e" + api.getConfigUtils().getSpawnMobCap() + " &centities at a time."));
+                player.sendMessage(Translate.miniMessage("<red>You can only spawn <yellow>" + api.getConfigUtils().getSpawnMobCap() + " <red>entities at a time."));
                 return true;
             }
 

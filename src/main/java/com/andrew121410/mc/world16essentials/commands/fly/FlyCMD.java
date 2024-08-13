@@ -1,4 +1,4 @@
-package com.andrew121410.mc.world16essentials.commands;
+package com.andrew121410.mc.world16essentials.commands.fly;
 
 import com.andrew121410.mc.world16essentials.World16Essentials;
 import com.andrew121410.mc.world16essentials.utils.API;

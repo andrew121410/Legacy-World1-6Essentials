@@ -44,11 +44,11 @@ public class TpAcceptCMD implements CommandExecutor {
             Player tpa = this.plugin.getServer().getPlayer(uuid);
             if (tpa != null) {
                 tpa.teleport(player);
-                tpa.sendMessage(Translate.color("&6" + player.getName() + " &ahas accepted your tpa request."));
+                tpa.sendMessage(Translate.miniMessage("<gold>" + player.getName() + " <green>has accepted your tpa request."));
                 this.tpaMap.remove(player.getUniqueId());
                 return true;
             } else {
-                player.sendMessage(Translate.color("&eYou don't have any tpa request."));
+                player.sendMessage(Translate.miniMessage("<yellow>You don't have any tpa request."));
             }
             return true;
         }

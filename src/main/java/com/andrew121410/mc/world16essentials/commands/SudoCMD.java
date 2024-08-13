@@ -32,10 +32,10 @@ public class SudoCMD implements CommandExecutor {
         if (args.length >= 2) {
             Player target = this.plugin.getServer().getPlayer(args[0]);
             if (target != null && target.isOnline()) sudoCommand(target, sender, args);
-            else sender.sendMessage(Translate.color("&4Player is not online!"));
+            else sender.sendMessage(Translate.miniMessage("<dark_red>Player is not online!"));
             return true;
         } else {
-            sender.sendMessage(Translate.color("&cUsage: &6/sudo <player> <command>"));
+            sender.sendMessage(Translate.miniMessage("<red>Usage: <gold>/sudo <player> <command>"));
         }
         return true;
     }
@@ -48,7 +48,7 @@ public class SudoCMD implements CommandExecutor {
         String command = String.join(" ", commandArray);
 
         this.plugin.getServer().dispatchCommand(target, command);
-        sender.sendMessage(Translate.color("&3Command &6" + command + " &3has been executed as &6" + target.getName()));
+        sender.sendMessage(Translate.miniMessage("<dark_aqua>Command <gold>" + command + " <dark_aqua>has been executed as <gold>" + target.getName()));
         return true;
     }
 }

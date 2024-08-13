@@ -44,10 +44,10 @@ public class TpDenyCMD implements CommandExecutor {
 
         if (tpa != null) {
             this.tpaMap.remove(player.getUniqueId());
-            tpa.sendMessage(Translate.color("&cYour tpa request got denied by " + player.getName() + "."));
-            player.sendMessage(Translate.color("&cYou have denied the tpa request from " + tpa.getName() + "."));
+            tpa.sendMessage(Translate.miniMessage("<red>Your tpa request got denied by " + player.getName() + "."));
+            player.sendMessage(Translate.miniMessage("<red>You have denied the tpa request from " + tpa.getName() + "."));
         } else {
-            player.sendMessage(Translate.color("&eYou don't have any tpa request."));
+            player.sendMessage(Translate.miniMessage("<yellow>You don't have any tpa request."));
         }
         return true;
     }

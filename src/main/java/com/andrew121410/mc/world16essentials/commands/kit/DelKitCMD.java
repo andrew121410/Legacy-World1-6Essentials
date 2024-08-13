@@ -55,15 +55,15 @@ public class DelKitCMD implements CommandExecutor {
             String name = args[0];
 
             if (!this.kitsMap.containsKey(name)) {
-                player.sendMessage(Translate.color("&cThat kit doesn't exist!"));
+                player.sendMessage(Translate.miniMessage("<red>That kit doesn't exist!"));
                 return true;
             }
 
             this.plugin.getKitManager().deleteKit(name);
-            player.sendMessage(Translate.color("&aKit &9" + name + " &ahas been deleted!"));
+            player.sendMessage(Translate.miniMessage("<green>Kit <blue>" + name + " <green>has been deleted!"));
             return true;
         }
-        player.sendMessage(Translate.color("&cUsage: /delkit <name>"));
+        player.sendMessage(Translate.miniMessage("<red>Usage: /delkit <name>"));
         return false;
     }
 }

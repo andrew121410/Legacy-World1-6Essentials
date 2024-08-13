@@ -36,10 +36,10 @@ public class CreateKitCMD implements CommandExecutor {
             String name = args[0];
 
             this.plugin.getKitManager().addKit(player.getUniqueId(), name, BukkitSerialization.turnInventoryIntoBase64s(player));
-            player.sendMessage(Translate.color("&2Kit &9" + name + " &2has been created!"));
+            player.sendMessage(Translate.miniMessage("<green>Kit <blue>" + name + " <green>has been created!"));
             return true;
         }
-        player.sendMessage(Translate.color("&2Usage: /createkit <name>"));
+        player.sendMessage(Translate.miniMessage("<red>Usage: /createkit <name>"));
         return false;
     }
 }

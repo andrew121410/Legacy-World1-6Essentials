@@ -1,7 +1,14 @@
 package com.andrew121410.mc.world16essentials;
 
 import com.andrew121410.mc.world16essentials.commands.*;
+import com.andrew121410.mc.world16essentials.commands.afk.AfkCMD;
+import com.andrew121410.mc.world16essentials.commands.afk.IgnoreAfkCMD;
+import com.andrew121410.mc.world16essentials.commands.afk.IsAfkCMD;
 import com.andrew121410.mc.world16essentials.commands.back.BackCMD;
+import com.andrew121410.mc.world16essentials.commands.fly.FlyCMD;
+import com.andrew121410.mc.world16essentials.commands.fly.FlySpeedCMD;
+import com.andrew121410.mc.world16essentials.commands.hide.HideCMD;
+import com.andrew121410.mc.world16essentials.commands.hide.UnhideCMD;
 import com.andrew121410.mc.world16essentials.commands.home.*;
 import com.andrew121410.mc.world16essentials.commands.kit.CreateKitCMD;
 import com.andrew121410.mc.world16essentials.commands.kit.DelKitCMD;
@@ -33,6 +40,7 @@ import com.andrew121410.mc.world16essentials.utils.OtherPlugins;
 import com.andrew121410.mc.world16essentials.utils.PlayerInitializer;
 import com.andrew121410.mc.world16utils.World16Utils;
 import com.andrew121410.mc.world16utils.chat.Translate;
+import com.andrew121410.mc.world16utils.updater.UpdateManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -109,6 +117,8 @@ public class World16Essentials extends JavaPlugin {
         pluginLoadMessage();
         registerBStats(); // Register bStats last
         getServer().getConsoleSender().sendMessage(Translate.color("&9[&6World1-6Essentials&9] &2World1-6Essentials has been loaded."));
+
+        UpdateManager.registerUpdater(this, new com.andrew121410.mc.world16essentials.Updater(this));
     }
 
     @Override
@@ -195,6 +205,8 @@ public class World16Essentials extends JavaPlugin {
         new UUIDCMD(this);
         new WorkBenchCMD(this);
         new XyzdxdydzCMD(this);
+        new IgnoreAfkCMD(this);
+        new RenderInfoCMD(this);
     }
 
     private void registerListeners() {
@@ -265,11 +277,6 @@ public class World16Essentials extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(Translate.color(stringBuilder));
     }
 
-    // 1.12.2 only
-    public World16Utils getWorld16Utils() {
-        return world16Utils;
-    }
-
     public MemoryHolder getMemoryHolder() {
         return memoryHolder;
     }
@@ -312,5 +319,10 @@ public class World16Essentials extends JavaPlugin {
 
     public OtherPlugins getOtherPlugins() {
         return otherPlugins;
+    }
+
+    // 1.12.2 only
+    public World16Utils getWorld16Utils() {
+        return world16Utils;
     }
 }

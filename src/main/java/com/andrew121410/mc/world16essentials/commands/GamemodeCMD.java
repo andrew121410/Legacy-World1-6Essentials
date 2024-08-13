@@ -54,7 +54,7 @@ public class GamemodeCMD implements CommandExecutor {
             if (target != null && target.isOnline()) changeGamemode(target, sender, text, gameMode);
             return true;
         } else {
-            sender.sendMessage(Translate.color("&cUsage: &6/" + label + " <player?>"));
+            sender.sendMessage(Translate.miniMessage("<red>Usage: <gold>/" + label + " <player?>"));
         }
         return true;
     }

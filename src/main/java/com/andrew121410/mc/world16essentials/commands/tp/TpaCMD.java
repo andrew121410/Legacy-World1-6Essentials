@@ -44,15 +44,15 @@ public class TpaCMD implements CommandExecutor {
 
             if (target != null && target.isOnline()) {
                 tpaMap.put(target.getUniqueId(), player.getUniqueId());
-                player.sendMessage(Translate.color("&aSent a tpa request to &6" + target.getName() + "&a."));
+                player.sendMessage(Translate.miniMessage("<green>Sent a tpa request to <gold>" + target.getName() + "<green>."));
                 sendTpaRequestMessage(player, target);
             } else {
-                player.sendMessage(Translate.color("&cThat player is not online."));
+                player.sendMessage(Translate.miniMessage("<red>That player is not online."));
             }
 
             return true;
         } else {
-            player.sendMessage(Translate.color("&cUsage: &6/tpa <player>"));
+            player.sendMessage(Translate.miniMessage("<red>Usage: <gold>/tpa <player>"));
         }
         return true;
     }

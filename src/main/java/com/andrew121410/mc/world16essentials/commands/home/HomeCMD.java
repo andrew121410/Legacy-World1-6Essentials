@@ -71,10 +71,10 @@ public class HomeCMD implements CommandExecutor {
             return;
         }
 
-//        if (!home.isWorldLoaded()) {
-//            player.sendMessage(Translate.colorc("&cWorld is not loaded."));
-//            return;
-//        }
+        if (!home.isWorldLoaded()) {
+            player.sendMessage(Translate.color("&cWorld is not loaded."));
+            return;
+        }
 
         player.teleport(home);
         player.sendMessage(Translate.color("&6Teleporting..."));

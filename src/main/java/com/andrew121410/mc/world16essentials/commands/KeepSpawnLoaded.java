@@ -52,7 +52,7 @@ public class KeepSpawnLoaded implements CommandExecutor {
                 this.plugin.getCustomConfigManager().getShitYml().getConfig().set("Worlds." + player.getWorld().getName() + ".ShouldKeepSpawnInMemory", "true");
                 this.plugin.getCustomConfigManager().getShitYml().saveConfig();
 
-                player.sendMessage(Translate.color("&aSpawn chunks will stay loaded if nobody is in them now."));
+                player.sendMessage(Translate.miniMessage("<green>Spawn chunks will stay loaded if nobody is in them now."));
                 return true;
             } else if (string.equalsIgnoreCase("false")) {
 
@@ -61,13 +61,13 @@ public class KeepSpawnLoaded implements CommandExecutor {
                 this.plugin.getCustomConfigManager().getShitYml().getConfig().set("Worlds." + player.getWorld().getName() + ".ShouldKeepSpawnInMemory", "false");
                 this.plugin.getCustomConfigManager().getShitYml().saveConfig();
 
-                player.sendMessage(Translate.color("&cSpawn chunks will not stay loaded if nobody is in them now."));
+                player.sendMessage(Translate.miniMessage("<red>Spawn chunks will not stay loaded if nobody is in them now."));
                 return true;
             }
         }
 
-        player.sendMessage(Translate.color("&6Current keep spawn loaded value: <reset>" + player.getWorld().getKeepSpawnInMemory()));
-        player.sendMessage(Translate.color("&cUsage: &6/keepspawnloaded <true/false>"));
+        player.sendMessage(Translate.miniMessage("<gold>Current keep spawn loaded value: <reset>" + player.getWorld().getKeepSpawnInMemory()));
+        player.sendMessage(Translate.miniMessage("<red>Usage: <yellow>/keepspawnloaded <true/false>"));
         return true;
     }
 }

@@ -8,9 +8,13 @@ import com.andrew121410.mc.world16utils.listeners.OnAsyncPlayerChatEvent;
 import com.andrew121410.mc.world16utils.listeners.OnInventoryClickEvent;
 import com.andrew121410.mc.world16utils.listeners.OnInventoryCloseEvent;
 import com.andrew121410.mc.world16utils.listeners.OnPlayerQuitEvent;
+import com.andrew121410.mc.world16utils.updater.UpdateManager;
+import com.andrew121410.mc.world16utils.utils.TabUtils;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -41,16 +45,28 @@ public final class World16Utils {
     }
 
     private void registerCommand() {
-        this.plugin.getCommand("world1-6utils").setExecutor((sender, command, s, args) -> {
-            if (!sender.hasPermission("world16.world1-6utils")) {
-                sender.sendMessage("You do not have permission to use this command.");
-                return true;
-            }
-
+        World16Essentials.getPlugin().getCommand("world1-6utils").setExecutor((sender, command, s, args) -> {
             if (args.length == 0) {
+                if (!sender.hasPermission("world16.world1-6utils")) {
+                    sender.sendMessage("You do not have permission to use this command.");
+                    return true;
+                }
+
                 sender.sendMessage("/world1-6utils update");
             } else if (args[0].equalsIgnoreCase("update") && args.length == 2) {
-                new UnsupportedOperationException("Update command is not supported.");
+                if (!sender.hasPermission("world16.world1-6utils")) {
+                    sender.sendMessage("You do not have permission to use this command.");
+                    return true;
+                }
+
+                String pluginName = args[1];
+
+                if (pluginName.equalsIgnoreCase("all")) {
+                    UpdateManager.updateAll(sender);
+                    return true;
+                }
+
+                UpdateManager.update(sender, pluginName);
             } else if (args.length == 2 && args[0].equalsIgnoreCase("callclickevent")) {
                 if (!(sender instanceof Player player)) {
                     sender.sendMessage("You must be a player to use this command.");
@@ -67,6 +83,19 @@ public final class World16Utils {
                 map.remove(key);
             }
             return true;
+        });
+
+        World16Essentials.getPlugin().getCommand("world1-6utils").setTabCompleter((sender, command, s, args) -> {
+            if (!sender.hasPermission("world16.world1-6utils")) return null;
+
+            if (args.length == 1) {
+                return Arrays.asList("update");
+            } else if (args[0].equalsIgnoreCase("update") && args.length == 2) {
+                List<String> strings = UpdateManager.getPluginNamesFromUpdaters();
+                strings.add("all");
+                return TabUtils.getContainsString(args[1], strings);
+            }
+            return null;
         });
     }
 

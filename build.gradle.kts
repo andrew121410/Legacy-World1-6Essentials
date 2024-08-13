@@ -35,8 +35,10 @@ repositories {
 }
 
 dependencies {
-    api("org.bstats:bstats-bukkit:3.0.2")
-    api("org.xerial:sqlite-jdbc:3.46.0.1") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("org.xerial:sqlite-jdbc:3.46.0.1") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation("net.kyori:adventure-text-minimessage:4.17.0")
+    implementation("net.kyori:adventure-text-serializer-legacy:4.17.0")
 
     // Paper goes first then CraftBukkit
     compileOnly("com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT")
@@ -58,7 +60,7 @@ tasks {
     }
 
     shadowJar {
-        archiveFileName.set("Legacy-World1-6Essentials.jar")
+        archiveFileName.set("Shadow-Legacy-World1-6Essentials.jar")
 
         relocate("org.bstats", "com.andrew121410.mc.world16essentials.bstats")
     }
@@ -80,7 +82,7 @@ tasks {
             shadowJar.get().archiveFile.get().asFile.delete()
         }
 
-        archiveFileName.set("Legacy-World1-6Essentials+java8.jar")
+        archiveFileName.set("Legacy-World1-6Essentials.jar")
     }
 }
 

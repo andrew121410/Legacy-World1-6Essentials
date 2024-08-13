@@ -88,8 +88,8 @@ public class KitCMD implements CommandExecutor {
 //                }
 //            }
 
-            sender.sendMessage(Translate.color("&c/kit <name>"));
-            sender.sendMessage(Translate.color("&c/kit <player> <name>"));
+            sender.sendMessage(Translate.miniMessage("<red>/kit <name>"));
+            sender.sendMessage(Translate.miniMessage("<red>/kit <player> <name>"));
         }
         return false;
     }
@@ -98,27 +98,27 @@ public class KitCMD implements CommandExecutor {
         KitObject kitObject = this.kitsMap.getOrDefault(kitName, null);
         if (kitObject == null) {
             if (sender == null) {
-                target.sendMessage(Translate.color("&cThat kit doesn't exist!"));
+                target.sendMessage(Translate.miniMessage("<red>That kit doesn't exist!"));
             } else {
-                sender.sendMessage(Translate.color("&cThat kit doesn't exist!"));
+                sender.sendMessage(Translate.miniMessage("<red>That kit doesn't exist!"));
             }
             return;
         }
 
         String permission = kitObject.getSettings().getPermission();
         if (!permission.equalsIgnoreCase("none") && !target.hasPermission(permission) && sender == null) {
-            target.sendMessage(Translate.color("&cYou don't have permission to use this kit!"));
+            target.sendMessage(Translate.miniMessage("<red>You don't have permission to use this kit!"));
             return;
         }
 
         if (!target.isOp() && !this.plugin.getKitSettingsManager().handleCooldown(target, kitObject) && sender == null) {
-            target.sendMessage(Translate.color("&cYou can't use this kit yet!"));
-            target.sendMessage(Translate.color("&6You can use this kit in " + this.plugin.getKitSettingsManager().getTimeUntilCanUseAgain(target, kitObject)));
+            target.sendMessage(Translate.miniMessage("<red>You can't use this kit yet!"));
+            target.sendMessage(Translate.miniMessage("<gold>You can use this kit in " + this.plugin.getKitSettingsManager().getTimeUntilCanUseAgain(target, kitObject)));
             return;
         }
 
         this.plugin.getKitManager().giveKit(target, kitObject);
-        target.sendMessage(Translate.color("&aYou have received the kit: &9" + kitName));
+        target.sendMessage(Translate.miniMessage("<green>You have received the kit: <blue>" + kitName));
     }
 
 //    private void handleBedrockPlayer(Player player) {
@@ -144,9 +144,9 @@ public class KitCMD implements CommandExecutor {
 //            return;
 //        }
 //
-//        // Have to call simpleFormBuilder.build() again because if not a NoClassDefFoundError would be thrown?
-//        // Caused by java.lang.ClassNotFoundException: org.geysermc.cumulus.form.Form
-//        // Broken classpath?
+    // Have to call simpleFormBuilder.build() again because if not a NoClassDefFoundError would be thrown?
+    // Caused by java.lang.ClassNotFoundException: org.geysermc.cumulus.form.Form
+    // Broken classpath?
 //        FloodgateApi.getInstance().sendForm(player.getUniqueId(), simpleFormBuilder.build());
-//    }
+//}
 }

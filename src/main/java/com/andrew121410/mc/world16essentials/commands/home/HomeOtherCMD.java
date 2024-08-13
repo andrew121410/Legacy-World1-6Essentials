@@ -84,10 +84,10 @@ public class HomeOtherCMD implements CommandExecutor, TabExecutor {
                 return true;
             }
 
-//            if (!location.isWorldLoaded()) {
-//                player.sendMessage(Translate.colorc("&cThat home's world is not loaded!"));
-//                return true;
-//            }
+            if (!location.isWorldLoaded()) {
+                player.sendMessage(Translate.color("&cThat home's world is not loaded!"));
+                return true;
+            }
 
             player.teleport(location);
             player.sendMessage(Translate.color("&6You have been teleported to " + offlinePlayer.getName() + "'s home named &c" + home));
@@ -100,6 +100,9 @@ public class HomeOtherCMD implements CommandExecutor, TabExecutor {
 
     private OfflinePlayer getPlayer(String name) {
         OfflinePlayer offlinePlayer = this.plugin.getServer().getOfflinePlayer(name);
+        if (offlinePlayer == null) {
+            offlinePlayer = this.plugin.getServer().getOfflinePlayer(name);
+        }
         return offlinePlayer;
     }
 

@@ -100,19 +100,19 @@ public class ConfigCMD implements CommandExecutor, TabExecutor {
             String message = String.join(" ", ourArgs);
             if (args[1].equalsIgnoreCase("prefix")) {
                 api.getMessagesUtils().setPrefix(message);
-                player.sendMessage(Translate.color("&aPrefix has been set"));
+                player.sendMessage(Translate.miniMessage("<green>Prefix has been set"));
                 sendConfigPreview(player, message);
             } else if (args[1].equalsIgnoreCase("welcomeBackMessage")) {
                 api.getMessagesUtils().setWelcomeBackMessage(message);
-                player.sendMessage(Translate.color("&aWelcomeBackMessage has been set"));
+                player.sendMessage(Translate.miniMessage("<green>WelcomeBackMessage has been set"));
                 sendConfigPreview(player, message);
             } else if (args[1].equalsIgnoreCase("firstJoinMessage")) {
                 api.getMessagesUtils().setFirstJoinMessage(message);
-                player.sendMessage(Translate.color("&aFirstJoinMessage has been set"));
+                player.sendMessage(Translate.miniMessage("<green>FirstJoinMessage has been set"));
                 sendConfigPreview(player, message);
             } else if (args[1].equalsIgnoreCase("leaveMessage")) {
                 api.getMessagesUtils().setLeaveMessage(message);
-                player.sendMessage(Translate.color("&aLeaveMessage has been set"));
+                player.sendMessage(Translate.miniMessage("<green>LeaveMessage has been set"));
                 sendConfigPreview(player, message);
             }
         }
@@ -121,6 +121,6 @@ public class ConfigCMD implements CommandExecutor, TabExecutor {
 
     private void sendConfigPreview(Player player, String message) {
         String preview = api.parseMessageString(player, message);
-        player.sendMessage(Translate.color("&6Here's a preview &r\"" + preview + "&r\""));
+        player.sendMessage(Translate.miniMessage("<gold>Here's a preview <reset>\"" + preview + "<reset>\""));
     }
 }

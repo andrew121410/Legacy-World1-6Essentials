@@ -137,14 +137,14 @@ public class RamCMD implements CommandExecutor {
         // Used percent color.
         String usedPercentColor = "";
         if (usedPercentSpace >= 90) {
-            usedPercentColor = "&c";
+            usedPercentColor = "<red>";
         } else if (usedPercentSpace >= 80) {
-            usedPercentColor = "&e";
+            usedPercentColor = "<yellow>";
         } else {
-            usedPercentColor = "&a";
+            usedPercentColor = "<green>";
         }
 
-        sender.sendMessage(Translate.color("&6Disk usage: " + usedPercentColor + usedPercentSpace + "% &e(&6" + usedSpaceInGB + "&e/&6" + totalSpaceInGB + " GB&e)"));
+        sender.sendMessage(Translate.miniMessage("<gold>Disk usage: " + usedPercentColor + usedPercentSpace + "% <yellow>(<gold>" + usedSpaceInGB + "<yellow>/<gold>" + totalSpaceInGB + " GB<yellow>)"));
     }
 
     private void diskInfoFromDfCommand(CommandSender sender) {
@@ -171,14 +171,14 @@ public class RamCMD implements CommandExecutor {
                     usedPercent = usedPercent.replace("%", "");
                 }
                 if (Integer.parseInt(usedPercent) >= 90) {
-                    usedPercentColor = "&c";
+                    usedPercentColor = "<red>";
                 } else if (Integer.parseInt(usedPercent) >= 80) {
-                    usedPercentColor = "&e";
+                    usedPercentColor = "<yellow>";
                 } else {
-                    usedPercentColor = "&a";
+                    usedPercentColor = "<green>";
                 }
 
-                sender.sendMessage(Translate.color("&6Disk usage: " + usedPercentColor + usedPercent + "% &e(&6" + usedSpace + "&e/&6" + totalSpace + "&e) (&6" + availableSpace + " available to use&e)"));
+                sender.sendMessage(Translate.miniMessage("<gold>Disk usage: " + usedPercentColor + usedPercent + "% <yellow>(<gold>" + usedSpace + "<yellow>/<gold>" + totalSpace + "<yellow>) (<gold>" + availableSpace + " available to use<yellow>)"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -201,7 +201,7 @@ public class RamCMD implements CommandExecutor {
                 String[] parts = line.split("\\s+");
                 String usedSpace = parts[0];
 
-                sender.sendMessage(Translate.color("&6MC Server disk usage: &e(&6" + usedSpace + " used&e)"));
+                sender.sendMessage(Translate.miniMessage("<gold>MC Server disk usage: <yellow>(<gold>" + usedSpace + " used<yellow>)"));
             }
         } catch (Exception e) {
             e.printStackTrace();

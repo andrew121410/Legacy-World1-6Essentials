@@ -20,6 +20,8 @@ import java.util.UUID;
 
 public class API {
 
+    // Testing
+
     private final String dateOfBuild = com.andrew121410.mc.world16essentials.utils.BlossomOutput.DATE_OF_BUILD;
 
     private final World16Essentials plugin;
@@ -102,14 +104,27 @@ public class API {
         return configurationSection;
     }
 
-    public void doAfk(Player player, String color) {
+    public boolean doAfk(Player player, String color, boolean announce) {
+        if (color == null) {
+            color = "<gray>";
+            if (player.isOp()) color = "<dark_red>";
+        }
+
         AfkObject afkObject = this.afkMap.get(player.getUniqueId());
         if (afkObject.isAfk()) {
-            this.plugin.getServer().broadcastMessage(Translate.color("&7*" + color + " " + player.getDisplayName() + "&r&7 is no longer AFK."));
+            if (announce) {
+//                this.plugin.getServer().broadcastMessage(Translate.color("&7*" + color + " " + player.getDisplayName() + "&r&7 is no longer AFK."));
+                this.plugin.getServer().broadcastMessage(Translate.miniMessage("<gray>* " + color + player.getName() + " <reset><gray>is no longer AFK."));
+            }
             afkObject.restart(player);
+            return false;
         } else {
-            this.plugin.getServer().broadcastMessage(Translate.color("&7* " + color + player.getDisplayName() + "&r&7" + " is now AFK."));
+            if (announce) {
+//                this.plugin.getServer().broadcastMessage(Translate.color("&7* " + color + player.getDisplayName() + "&r&7" + " is now AFK."));
+                this.plugin.getServer().broadcastMessage(Translate.miniMessage("<gray>* " + color + player.getName() + " <reset><gray>is now AFK."));
+            }
             afkObject.setAfk(true, player.getLocation());
+            return true;
         }
     }
 

@@ -145,8 +145,4 @@ public class Utils {
             return false;
         }
     }
-
-    public static boolean indexExists(List<?> list, int index) {
-        return index >= 0 && index < list.size();
-    }
 }

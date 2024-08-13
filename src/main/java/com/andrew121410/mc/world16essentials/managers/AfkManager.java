@@ -3,6 +3,7 @@ package com.andrew121410.mc.world16essentials.managers;
 import com.andrew121410.mc.world16essentials.World16Essentials;
 import com.andrew121410.mc.world16essentials.objects.AfkObject;
 import com.andrew121410.mc.world16essentials.utils.API;
+import com.andrew121410.mc.world16utils.chat.Translate;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -43,20 +44,19 @@ public class AfkManager {
                         iterator.remove();
                         return;
                     }
-                    String color = player.isOp() ? "&4" : "&7";
 
                     // Don't run if player is already AFK
                     if (afkObject.isAfk()) return;
 
                     // Checks if the player has not moved in 3 min if not afk them if so restart()
                     if (player.getLocation().equals(afkObject.getLocation()) && !api.didPlayerJustJoin(player)) {
-                        api.doAfk(player, color);
+                        api.doAfk(player, null, !afkObject.isIgnore());
                     } else afkObject.restart(player);
                 }
             }
         }.runTaskTimer(plugin, 1200L, 2400L);
 
-        // Checks if the player moves
+        // Checks if the player moves, this runs every 2 seconds
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -72,14 +72,17 @@ public class AfkManager {
                         iterator.remove();
                         return;
                     }
-                    String color = player.isOp() ? "&4" : "&7";
 
                     // If not afk don't run
                     if (!afkObject.isAfk()) return;
 
+                    if (afkObject.isIgnore()) {
+                        player.sendActionBar(Translate.miniMessage("<aqua>You are AFK, but it won't be announced."));
+                    }
+
                     // Only if the player moves more than 3 blocks
                     if (player.getLocation().distanceSquared(afkObject.getLocation()) > 9) {
-                        api.doAfk(player, color);
+                        api.doAfk(player, null, !afkObject.isIgnore());
                     }
                 }
             }

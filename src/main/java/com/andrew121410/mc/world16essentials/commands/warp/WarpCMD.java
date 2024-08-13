@@ -93,6 +93,16 @@ public class WarpCMD implements CommandExecutor {
             return;
         }
 
+        // World may not be loaded, so we need to check.
+        if (!warpLocation.isWorldLoaded()) {
+            if (sender == null) {
+                target.sendMessage(Translate.color("&cWorld is not loaded."));
+            } else {
+                sender.sendMessage(Translate.color("&cWorld is not loaded."));
+            }
+            return;
+        }
+
         target.teleport(warpLocation);
         target.sendMessage(Translate.color("&6Teleporting..."));
         if (sender != null) {
@@ -104,7 +114,7 @@ public class WarpCMD implements CommandExecutor {
 //        SimpleForm.Builder simpleFormBuilder = SimpleForm.builder().title("Warps").content("List of all warps");
 //
 //        for (String warpName : this.warpsMap.keySet()) {
-//            // Check if the player has permission to use this warp, if not, skip it.
+//             Check if the player has permission to use this warp, if not, skip it.
 //            if (!player.hasPermission("world16.warp." + warpName)) continue;
 //
 //            simpleFormBuilder.button(warpName);
@@ -122,9 +132,9 @@ public class WarpCMD implements CommandExecutor {
 //            return;
 //        }
 //
-//        // Have to call simpleFormBuilder.build() again because if not a NoClassDefFoundError would be thrown?
-//        // Caused by java.lang.ClassNotFoundException: org.geysermc.cumulus.form.Form
-//        // Broken classpath?
+//         Have to call simpleFormBuilder.build() again because if not a NoClassDefFoundError would be thrown?
+//         Caused by java.lang.ClassNotFoundException: org.geysermc.cumulus.form.Form
+//         Broken classpath?
 //        FloodgateApi.getInstance().sendForm(player.getUniqueId(), simpleFormBuilder.build());
-//    }
+//}
 }

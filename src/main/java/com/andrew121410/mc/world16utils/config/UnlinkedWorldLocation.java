@@ -1,5 +1,6 @@
 package com.andrew121410.mc.world16utils.config;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
@@ -7,6 +8,8 @@ import org.bukkit.configuration.serialization.SerializableAs;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.logging.Level;
 
 /**
  * A normal Location when deserialized will not work if the world is not loaded.
@@ -17,44 +20,38 @@ import java.util.Map;
 @SerializableAs("UnlinkedWorldLocation")
 public class UnlinkedWorldLocation extends Location implements ConfigurationSerializable {
 
-    private final String world;
+    private final UUID world;
 
-    public UnlinkedWorldLocation(String world, double x, double y, double z, float yaw, float pitch) {
+    public UnlinkedWorldLocation(UUID world, double x, double y, double z, float yaw, float pitch) {
         super(null, x, y, z, yaw, pitch); // World is null, because it might not be loaded.
         this.world = world;
     }
 
-    public UnlinkedWorldLocation(String world, double x, double y, double z) {
+    public UnlinkedWorldLocation(UUID world, double x, double y, double z) {
         this(world, x, y, z, 0, 0);
     }
 
     public UnlinkedWorldLocation(Location location) {
-        this(location.getWorld().getName(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+        this(location.getWorld().getUID(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
-//    @Override
-//    public boolean isWorldLoaded() {
-//        return org.bukkit.Bukkit.getWorld(world) != null;
-//    }
+    public boolean isWorldLoaded() {
+        return org.bukkit.Bukkit.getWorld(world) != null;
+    }
 
     @Override
     public World getWorld() {
         return org.bukkit.Bukkit.getWorld(world);
     }
 
-    public String getWorldName() {
-        return world;
-    }
-
-    @Deprecated(forRemoval = true)
-    public Location toLocation() {
-        return new Location(getWorld(), getX(), getY(), getZ(), getYaw(), getPitch());
+    public UUID getWorldUUID() {
+        return this.world;
     }
 
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new LinkedHashMap<>();
-        map.put("world", world);
+        map.put("world", String.valueOf(this.world)); // Why can't I just save it as a UUID and not a string?
         map.put("x", this.getX());
         map.put("y", this.getY());
         map.put("z", this.getZ());
@@ -64,7 +61,24 @@ public class UnlinkedWorldLocation extends Location implements ConfigurationSeri
     }
 
     public static UnlinkedWorldLocation deserialize(Map<String, Object> map) {
-        String world = (String) map.get("world");
+        String worldString = (String) map.get("world");
+
+        // Temporary
+        UUID worldUUID;
+        try {
+            worldUUID = UUID.fromString(worldString);
+        } catch (Exception e) {
+            Bukkit.getLogger().log(Level.SEVERE, "UnlinkedWorldLocation - You need to convert the world name to a UUID. Using the world name is deprecated.");
+
+            World world = org.bukkit.Bukkit.getWorld(worldString);
+
+            if (world == null) {
+                throw new IllegalArgumentException("Invalid world: " + worldString);
+            }
+
+            worldUUID = world.getUID();
+        }
+
         double x = (Double) map.getOrDefault("x", 0);
         double y = (Double) map.getOrDefault("y", 0);
         double z = (Double) map.getOrDefault("z", 0);
@@ -73,6 +87,6 @@ public class UnlinkedWorldLocation extends Location implements ConfigurationSeri
         double fakeYaw = (Double) map.getOrDefault("yaw", 0);
         double fakePitch = (Double) map.getOrDefault("pitch", 0);
 
-        return new UnlinkedWorldLocation(world, x, y, z, (float) fakeYaw, (float) fakePitch);
+        return new UnlinkedWorldLocation(worldUUID, x, y, z, (float) fakeYaw, (float) fakePitch);
     }
 }

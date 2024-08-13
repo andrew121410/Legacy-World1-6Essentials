@@ -66,30 +66,30 @@ public class SaveInventoryCMD implements CommandExecutor {
                 SavedInventoryObject savedInventoryObject = SavedInventoryObject.create(player, name);
 
                 this.plugin.getSavedInventoriesManager().save(player.getUniqueId(), savedInventoryObject);
-                player.sendMessage(Translate.color("&aInventory saved as &6" + name.toLowerCase()));
+                player.sendMessage(Translate.miniMessage("<green>Inventory saved as <gold>" + name.toLowerCase()));
                 return true;
             } else if (action.equalsIgnoreCase("load")) {
                 if (!savedInventorySet.contains(name)) {
-                    player.sendMessage(Translate.color("&cUnable to find the inventory &6" + name.toLowerCase()));
+                    player.sendMessage(Translate.miniMessage("<red>Unable to find the inventory <gold>" + name.toLowerCase()));
                     return true;
                 }
 
                 SavedInventoryObject savedInventoryObject = this.plugin.getSavedInventoriesManager().load(player.getUniqueId(), name);
                 savedInventoryObject.give(player);
-                player.sendMessage(Translate.color("&aInventory loaded as &6" + name));
+                player.sendMessage(Translate.miniMessage("<green>Inventory loaded as <gold>" + name));
                 return true;
             } else if (action.equalsIgnoreCase("delete")) {
                 if (!savedInventorySet.contains(name)) {
-                    player.sendMessage(Translate.color("&cUnable to find the inventory &6" + name.toLowerCase()));
+                    player.sendMessage(Translate.miniMessage("<red>Unable to find the inventory <gold>" + name.toLowerCase()));
                     return true;
                 }
 
                 this.plugin.getSavedInventoriesManager().delete(player.getUniqueId(), name);
-                player.sendMessage(Translate.color("&aInventory deleted as &6" + name));
+                player.sendMessage(Translate.miniMessage("<green>Inventory deleted as <gold>" + name));
                 return true;
             }
         } else {
-            player.sendMessage(Translate.color("&cUsage: &6/saveinventory <save/load/delete> <name>"));
+            player.sendMessage(Translate.miniMessage("<red>Usage: <gold>/saveinventory <save/load/delete> <name>"));
         }
         return true;
     }

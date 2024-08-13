@@ -3,105 +3,161 @@ version: 1.0
 author: Andrew121410
 main: com.andrew121410.mc.world16essentials.World16Essentials
 
-softdepend:
-  - EssentialsX
-  - Essentials
-  - CMI
-  - floodgate
-
 commands:
   world1-6utils:
+    permission: world16.world1-6utils
 
   back:
+    permission: world16.back
 
   clonehomes:
+    permission: world16.clonehomes
   delhome:
+    permission: world16.delhome
   home:
+    permission: world16.home
   homelist:
     aliases:
       - homes
+    permission: world16.homelist
   homeother:
+    permission: world16.homeother
   sethome:
+    permission: world16.sethome
 
   createkit:
+    permission: world16.kit.create
   delkit:
     aliases:
       - deletekit
+    permission: world16.kit.delete
   kit:
+    permission: world16.kit.use
 
   emsg:
+    permission: world16.emsg
   reply:
     aliases:
       - r
       - ereply
+    permission: world16.reply
 
   firstjoined:
+    permission: world16.firstjoined
   lastjoin:
     aliases:
       - lastonline
+    permission: world16.lastjoin
   timeoflogin:
+    permission: world16.timeoflogin
 
   repairall:
+    permission: world16.repair.all
   repair:
+    permission: world16.repair
 
   setspawn:
+    permission: world16.setspawn
   spawn:
+    permission: world16.spawn
 
   day:
+    permission: world16.day
   night:
+    permission: world16.night
 
   tpaccept:
+    permission: world16.tpaccept
   tpa:
+    permission: world16.tpa
   tpdeny:
     aliases:
       - tpadeny
+    permission: world16.tpdeny
 
   delwarp:
+    permission: world16.delwarp
   setwarp:
+    permission: world16.setwarp
   warp:
     aliases:
       - to
+    permission: world16.warp
 
   afk:
+    permission: world16.afk
+  ignoreafk:
+    permission: world16.ignoreafk
   bed:
+    permission: world16.bed
   broadcast:
+    permission: world16.broadcast
   colors:
+    permission: world16.colors
   commandblock:
+    permission: world16.commandblock
   commandblockfind:
+    permission: world16.commandblockfind
   config1-6:
+    permission: world16.config
   countallentities:
+    permission: world16.countallentities
   debug1-6:
+    permission: world16.debug
   echest:
+    permission: world16.echest
   feed:
+    permission: world16.feed
   fly:
+    permission: world16.fly
   fs:
     aliases:
       - flyspeed
       - fspeed
+    permission: world16.fs
   egamemode:
     aliases:
       - gma
       - gmc
       - gms
       - gmsp
+    permission: world16.egamemode
   god:
+    permission: world16.god
   heal:
+    permission: world16.heal
   hide:
+    permission: world16.hide
   isafk:
+    permission: world16.isafk
   powertool:
+    permission: world16.powertool
   ram:
     aliases:
       - gc
+    permission: world16.ram
+  renderinfo:
+    permission: world16.renderinfo
   saveinventory:
+    permission: world16.saveinventory
   keepspawnloaded:
+    permission: world16.keepspawnloaded
   sign:
+    permission: world16.sign
   spawnmob:
+    permission: world16.spawnmob
   sudo:
+    permission: world16.sudo
   unhide:
+    permission: world16.unhide
   unsafenchant:
+    permission: world16.unsafenchant
   uuid:
+    permission: world16.uuid
   workbench:
+    permission: world16.workbench
   xyzdxdydz:
+    permission: world16.xyzdxdydz
 
 permissions:
   world16.back:
@@ -198,6 +254,9 @@ permissions:
   world16.afk:
     description: Allows you to use afk cmd
     default: op
+  world16.ignoreafk:
+    description: Allows you to use ignoreafk cmd
+    default: op
   world16.bed:
     description: Allows you to use bed cmd
     default: op
@@ -265,6 +324,9 @@ permissions:
     default: op
   world16.ram:
     description: Allows you to use ram cmd
+    default: op
+  world16.renderinfo:
+    description: Allows you to use renderinfo cmd
     default: op
   world16.saveinventory:
     description: Allows you to use saveinventory cmd

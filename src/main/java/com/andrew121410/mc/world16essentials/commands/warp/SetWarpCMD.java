@@ -45,15 +45,15 @@ public class SetWarpCMD implements CommandExecutor {
             Location location = player.getLocation();
 
             if (this.warpsMap.containsKey(name)) {
-                player.sendMessage(Translate.color("&cThe warp &9" + name + " &calready exists."));
+                player.sendMessage(Translate.miniMessage("<red>The warp <blue>" + name + " <red>already exists."));
                 return true;
             }
 
             this.plugin.getWarpManager().add(name, location);
-            player.sendMessage(Translate.color("&2Warp &9" + name + " &2has been set."));
+            player.sendMessage(Translate.miniMessage("<dark_green>Warp <blue>" + name + " <dark_green>has been set."));
             return true;
         } else {
-            player.sendMessage(Translate.color("&cUsage: &6/setwarp <Name>"));
+            player.sendMessage(Translate.miniMessage("<red>Usage: <gold>/setwarp <blue><Name>"));
         }
         return true;
     }
