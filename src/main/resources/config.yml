@@ -1,0 +1,17 @@
+# Silent the last updated message on join for OPs (F.Y.I regular non-OPs don't see the message)
+showLastUpdatedMessageToOPs: true
+
+# This allows you to use color codes like "&6Hello" in signs
+signTranslateColors: true
+
+# Prevents players from crops trampling
+preventCropsTrampling: false
+
+# The limit of how many mobs you can spawn at once with the "/spawnmob" command
+spawnMobCap: 10
+
+# When a player dies it will save their inventory with the save inventory function "/saveinventory load death"
+saveInventoryOnDeath: false
+
+# This will use the "df -h" command to get disk usage info for /ram command (crashes if you have HDD)
+moreAccurateDiskInfo: false

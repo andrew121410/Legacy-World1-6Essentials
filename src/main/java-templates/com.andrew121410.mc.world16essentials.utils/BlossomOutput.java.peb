@@ -1,0 +1,6 @@
+package com.andrew121410.mc.world16essentials.utils;
+
+public final class BlossomOutput {
+
+    public static final String DATE_OF_BUILD = "{{ date_of_build }}";
+}
