@@ -12,6 +12,10 @@ This plugin was made due to the fact that EssentialsX overrides some Minecraft C
 Even though I could've easily forked EssentialsX and fixed that. I didn't though so I just made this.
 
 [List of servers using this plugin](https://bstats.org/plugin/bukkit/World1-6Essentials)
+## Can I change out Legacy-World1-6Essentials for World1-6Essentials?
+Everything should work except for kits(/kit), and saved inventories(/saveinventory) they will not work properly, as they use a different format.
+What would happen? Is if you tried loading a kit of saved inventory saved with Legacy-World1-6Essentials it will just throw an error using World1-6Essentials.
+
 ## To Install:
 [Latest Build of Legacy-World1-6Essentials](https://github.com/World1-6/Legacy-World1-6Essentials/releases)
 
