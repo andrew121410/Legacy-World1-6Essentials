@@ -4,10 +4,10 @@ import java.util.*
 plugins {
     `java-library`
     `maven-publish`
-    id("io.freefair.lombok") version "8.10" // https://plugins.gradle.org/plugin/io.freefair.lombok
-    id("com.gradleup.shadow") version "8.3.0" // https://github.com/GradleUp/shadow
+    id("io.freefair.lombok") version "8.10.2" // https://plugins.gradle.org/plugin/io.freefair.lombok
+    id("com.gradleup.shadow") version "8.3.5" // https://github.com/GradleUp/shadow
     id("net.kyori.blossom") version "2.1.0" // https://github.com/KyoriPowered/blossom
-    id("xyz.wagyourtail.jvmdowngrader") version "1.1.2" // https://github.com/unimined/JvmDowngrader https://plugins.gradle.org/plugin/xyz.wagyourtail.jvmdowngrader
+    id("xyz.wagyourtail.jvmdowngrader") version "1.2.1" // https://github.com/unimined/JvmDowngrader https://plugins.gradle.org/plugin/xyz.wagyourtail.jvmdowngrader
 }
 
 group = "com.andrew121410.mc"
@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     implementation("org.bstats:bstats-bukkit:3.0.2")
-    implementation("com.github.andrew121410:CCUtilsJava:a0c6f17b96")
+    implementation("com.github.andrew121410:CCUtilsJava:20b05043ca")
     implementation("net.kyori:adventure-text-minimessage:4.17.0")
     implementation("net.kyori:adventure-text-serializer-legacy:4.17.0")
 
