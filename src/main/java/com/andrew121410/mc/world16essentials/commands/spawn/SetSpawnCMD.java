@@ -5,6 +5,7 @@ import com.andrew121410.mc.world16essentials.config.CustomConfigManager;
 import com.andrew121410.mc.world16essentials.utils.API;
 import com.andrew121410.mc.world16utils.chat.Translate;
 import com.andrew121410.mc.world16utils.config.CustomYmlManager;
+import com.andrew121410.mc.world16utils.config.UnlinkedWorldLocation;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,7 +38,8 @@ public class SetSpawnCMD implements CommandExecutor {
             return true;
         }
 
-        this.api.setLocationToFile(this.shitYml, "Spawn.default", player.getLocation());
+        UnlinkedWorldLocation unlinkedWorldLocation = new UnlinkedWorldLocation(player.getLocation());
+        this.api.setLocationToFile(this.shitYml, "Spawn.default", unlinkedWorldLocation);
         player.sendMessage(Translate.color("&6Spawn location set for group default."));
         return true;
     }

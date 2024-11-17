@@ -7,6 +7,7 @@ import com.andrew121410.mc.world16essentials.config.MessagesUtils;
 import com.andrew121410.mc.world16essentials.objects.AfkObject;
 import com.andrew121410.mc.world16utils.chat.Translate;
 import com.andrew121410.mc.world16utils.config.CustomYmlManager;
+import com.andrew121410.mc.world16utils.config.UnlinkedWorldLocation;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -84,12 +85,12 @@ public class API {
         return minutes < 1;
     }
 
-    public Location getLocationFromFile(CustomYmlManager customYmlManager, String path) {
+    public UnlinkedWorldLocation getLocationFromFile(CustomYmlManager customYmlManager, String path) {
         if (customYmlManager == null || path == null) return null;
-        return (Location) customYmlManager.getConfig().get(path);
+        return (UnlinkedWorldLocation) customYmlManager.getConfig().get(path);
     }
 
-    public void setLocationToFile(CustomYmlManager customYmlManager, String path, Location location) {
+    public void setLocationToFile(CustomYmlManager customYmlManager, String path, UnlinkedWorldLocation location) {
         if (customYmlManager == null || path == null || location == null) {
             return;
         }
