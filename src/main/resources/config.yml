@@ -15,3 +15,7 @@ saveInventoryOnDeath: false
 
 # This will use the "df -h" command to get disk usage info for /ram command (crashes if you have HDD)
 moreAccurateDiskInfo: false
+
+# Offline players tab completion for commands like "/homeother" and "/offlinelocation"
+# This is optional because the getOfflinePlayers() call can be expensive as all player data files get loaded
+offlinePlayersTabCompletion: true

@@ -12,6 +12,7 @@ public class ConfigUtils {
     private int spawnMobCap;
     private boolean saveInventoryOnDeath;
     private boolean moreAccurateDiskInfo;
+    private boolean offlinePlayersTabCompletion;
 
     public ConfigUtils(World16Essentials plugin) {
         this.plugin = plugin;
@@ -22,6 +23,7 @@ public class ConfigUtils {
         this.spawnMobCap = this.plugin.getConfig().getInt("spawnMobCap");
         this.saveInventoryOnDeath = this.plugin.getConfig().getBoolean("saveInventoryOnDeath");
         this.moreAccurateDiskInfo = this.plugin.getConfig().getBoolean("moreAccurateDiskInfo");
+        this.offlinePlayersTabCompletion = this.plugin.getConfig().getBoolean("offlinePlayersTabCompletion");
     }
 
     public boolean isShowLastUpdatedMessageToOPs() {
@@ -83,5 +85,14 @@ public class ConfigUtils {
         this.plugin.getConfig().set("moreAccurateDiskInfo", moreAccurateDiskInfo);
         this.plugin.saveConfig();
     }
-}
 
+    public boolean isOfflinePlayersTabCompletion() {
+        return offlinePlayersTabCompletion;
+    }
+
+    public void setOfflinePlayersTabCompletion(boolean offlinePlayersTabCompletion) {
+        this.offlinePlayersTabCompletion = offlinePlayersTabCompletion;
+        this.plugin.getConfig().set("offlinePlayersTabCompletion", offlinePlayersTabCompletion);
+        this.plugin.saveConfig();
+    }
+}

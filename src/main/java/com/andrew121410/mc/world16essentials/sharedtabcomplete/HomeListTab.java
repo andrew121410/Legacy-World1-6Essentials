@@ -8,7 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class HomeListTab implements TabCompleter {
 
@@ -26,14 +29,10 @@ public class HomeListTab implements TabCompleter {
         if (!(sender instanceof Player player)) return null;
         if (!player.hasPermission("world16.home")) return null;
 
+        Map<String, UnlinkedWorldLocation> homesMap = rawHomesMap.get(player.getUniqueId());
+        if (homesMap == null) return null;
         if (args.length == 1) {
-            if (rawHomesMap.get(player.getUniqueId()) == null) {
-                player.kickPlayer("[HomeTabComplete] You where not in the memory so NPE was caused.");
-                return null;
-            }
-            Set<String> homeSet = rawHomesMap.get(player.getUniqueId()).keySet();
-            String[] homeString = homeSet.toArray(new String[0]);
-            return TabUtils.getContainsString(args[0], Arrays.asList(homeString));
+            return TabUtils.getContainsString(args[0], new ArrayList<>(homesMap.keySet()));
         }
         return null;
     }
