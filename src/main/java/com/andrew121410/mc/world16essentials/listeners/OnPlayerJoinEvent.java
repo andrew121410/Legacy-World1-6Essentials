@@ -43,7 +43,7 @@ public class OnPlayerJoinEvent implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10.0f, 1.0f);
 
         if (player.isOp() && this.api.getConfigUtils().isShowLastUpdatedMessageToOPs()) {
-            player.sendMessage(Translate.color("&o&cW&6o&er&al&9d&b1&5-&c6&6E&es&as&9e&bn&5t&ci&6a&el&as was last updated on " + api.getDateOfBuild()));
+            player.sendMessage(Translate.color("&cL&6e&eg&aa&3c&9y&5-&cW&6o&er&al&3d&91&5-&c6&6E&es&as&3e&9n&5t&ci&6a&el&as was last updated on " + api.getDateOfBuild()));
         }
 
         this.plugin.getPlayerInitializer().load(player);
